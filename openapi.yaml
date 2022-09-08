@@ -1,0 +1,404 @@
+openapi: 3.0.3
+info:
+  title: lab 1 SOA by Artur and Kirill
+  version: 1.0.11
+tags:
+  - name: dragon
+    description: Dragon book 
+    externalDocs:
+      description: Find out more
+      url: https://en.wikipedia.org/wiki/Dragon
+  - name: killer
+    description: I will kiss you
+    
+# Dragons:
+paths:
+  /dragon:
+    post:
+      tags:
+        - dragon
+      summary: Add a new dragon
+      description: Brand new dragon SALE SALE
+      operationId: addDragon
+      requestBody:
+        description: Create a new Dragon
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Dragon'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dragon'          
+        '405':
+          description: Invalid input
+      # security:
+      #   - petstore_auth:
+      #       - write:pets
+      #       - read:pets
+  
+    put:
+      tags:
+        - dragon
+      summary: Update an existing dragon
+      description: Update an existing dragon by Id
+      operationId: updateDragon
+      requestBody:
+        description: Update an existent dragon
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Dragon'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dragon'          
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Dragon not found
+        '405':
+          description: Validation exception
+          
+  /dragon/{dragonId}:
+    get:
+      tags:
+        - dragon
+      summary: Come to me
+      description: Get an existing dragon by Id
+      operationId: getDragonById
+      parameters:
+        - in: path # not query
+          name: dragonId
+          description: id of Dragonnnnnn
+          required: true
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+            example: 10
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dragon'          
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Dragon not found
+        '405':
+          description: Validation exception
+    
+    delete:
+      tags:
+        - dragon
+      summary: Let it DIE
+      description: delete current Dragon
+      operationId: deleteDragonById
+      parameters:
+        - name: dragonId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+            example: 10
+      responses:
+        "200":
+          description: Successful Operation
+        '400':
+          description: Invalid ID supplied
+        "404":
+          description: Dragon Not Found
+      
+  /dragon/age/average:
+    get:
+      tags:
+        - dragon
+      summary: get average age of all dragons
+      description: how old are your dragons?
+      operationId: getDragonsAverageAge
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  averageAge:
+                    type: number
+                    minimum: 0
+                    example: 10
+          
+  /dragon/age/{dragonAge}:
+    get:
+      tags:
+        - dragon
+      summary: get all dragons less than current dragonAge
+      description: get all dragons less than current dragonAge
+      operationId: getDragonsByAge
+      parameters:
+        - name: dragonAge
+          in: path
+          required: true
+          description: greater than 0
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+          example: 1100
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  dragons:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Dragon"
+        "400":
+          description: invalid dragon age
+          
+  /dragon/name/{dragonName}:
+    get:
+      tags:
+        - dragon
+      summary: get dragon by name
+      description: we will give you ALL dragons names of witch start with your current dragonName
+      operationId: getDragonsByName
+      parameters:
+        - name: dragonName
+          in: path
+          required: true
+          description: beginning of Dragon name
+          schema:
+            type: string
+          example: snoop
+      responses:
+        "200":
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  dragons:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Dragon"
+  
+  /dragon/getAll:
+    get:
+      tags:
+        - dragon
+      summary: get all Dragons
+      description: GIVE THEM TO MEEEE
+      operationId: getAllDragons
+      responses:
+        "200":
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  dragons:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Dragon"
+            
+      
+# Killers:
+  
+  /dragon/{dragon-id}/kill:
+    delete:
+      tags:
+        - killer
+      summary: :( dont fcking do it
+      description: kill current Dragon
+      operationId: killDragonById
+      parameters:
+        - name: dragon-id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+            example: 10
+      responses:
+        "200":
+          description: Successful Operation
+        '400':
+          description: Invalid ID supplied
+        "404":
+          description: Dragon Not Found
+
+  /team/{team-id}/move-to-cave/{cave-id}:
+    put:
+      tags:
+        - killer
+      summary: move to another cave
+      descriprion: move team to another cave
+      operationId: moveTeamToCave
+      parameters:
+        - name: team-id
+          in: path
+          required: true
+          description: team id > 0
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+            example: 132
+            
+        - name: cave-id
+          in: path
+          required: true
+          description: cave id > 0
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+            example: 132
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Team/Cave not found
+                
+          
+          
+  
+ 
+components:
+  schemas:
+    Dragon:
+      required:
+        - id
+        - name
+        - coordinates
+        - creationDate
+        - color
+        - type
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          minimum: 0
+          example: 10
+        name:
+          type: string
+          example: snoopie
+        coordinates:
+          $ref: "#/components/schemas/Coordinates"
+        # photoUrls:
+        #   type: array
+        #   xml:
+        #     wrapped: true
+        #   items:
+        #     type: string
+        #     xml:
+        #       name: photoUrl
+        creationDate:
+          $ref: "#/components/schemas/ZonedDateTime"
+        age:
+          type: integer
+          format: int64
+          minimum: 1
+          example: 1000
+        color:
+          $ref: "#/components/schemas/Color"
+        type:
+          $ref: "#/components/schemas/DragonType"
+        character:
+          $ref: "#/components/schemas/DragonCharacter"
+        cave:
+          $ref: "#/components/schemas/DragonCave"
+        status:
+          type: string
+          description: pet status in the store
+          enum:
+            - available
+            - pending
+            - sold
+    
+    Coordinates:
+      required:
+        - x
+        - y
+      type: object
+      properties:
+        x:
+          type: integer
+          format: int64
+          example: 1
+        y:
+          type: integer
+          format: int64
+          example: 12
+    ZonedDateTime:
+      type: object
+      properties:
+        time:
+          type: string
+          example: "12.04.1935"
+    
+    Color:
+      type: string
+      enum:
+        - GREEN
+        - WHITE
+        - RED
+        - BLACK
+      example: GREEN
+    
+    DragonType:
+      type: string
+      enum:
+        - UNDERGROUND
+        - AIR
+        - FIRE
+      
+    DragonCharacter:
+      type: string
+      nullable: true
+      enum:
+        - GOOD
+        - CHAOTIC
+        - FICKLE
+      example: null
+    
+    DragonCave:
+      required:
+        - id
+        - numberOfTreasures
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: integer
+          format: int64
+          minimum: 1
+          example: 1
+        numberOfTreasures:
+          type: integer
+          format: int64
+          minimum: 1
+          example: 100
+          
+      
