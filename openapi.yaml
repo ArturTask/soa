@@ -13,7 +13,25 @@ tags:
     
 # Dragons:
 paths:
-  /dragon:
+  /dragons:
+    get:
+      tags:
+        - dragon
+      summary: get all Dragons
+      description: GIVE THEM TO MEEEE
+      operationId: getAllDragons
+      responses:
+        "200":
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  dragons:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Dragon"
+
     post:
       tags:
         - dragon
@@ -45,7 +63,7 @@ paths:
       tags:
         - dragon
       summary: Update an existing dragon
-      description: Update an existing dragon by Id
+      description: Update an existing dragon by entity
       operationId: updateDragon
       requestBody:
         description: Update an existent dragon
@@ -68,7 +86,7 @@ paths:
         '405':
           description: Validation exception
           
-  /dragon/{dragonId}:
+  /dragons/{dragon-id}:
     get:
       tags:
         - dragon
@@ -77,7 +95,7 @@ paths:
       operationId: getDragonById
       parameters:
         - in: path # not query
-          name: dragonId
+          name: dragon-id
           description: id of Dragonnnnnn
           required: true
           schema:
@@ -106,7 +124,7 @@ paths:
       description: delete current Dragon
       operationId: deleteDragonById
       parameters:
-        - name: dragonId
+        - name: dragon-id
           in: path
           required: true
           schema:
@@ -122,8 +140,8 @@ paths:
         "404":
           description: Dragon Not Found
       
-  /dragon/age/average:
-    get:
+  /dragons/age/average:
+    post:
       tags:
         - dragon
       summary: get average age of all dragons
@@ -141,15 +159,15 @@ paths:
                     minimum: 0
                     example: 10
           
-  /dragon/age/{dragonAge}:
-    get:
+  /dragons/age/less/{dragon-age}:
+    post:
       tags:
         - dragon
-      summary: get all dragons less than current dragonAge
-      description: get all dragons less than current dragonAge
+      summary: get all dragons less than current dragon-age
+      description: get all dragons less than current dragon-age
       operationId: getDragonsByAge
       parameters:
-        - name: dragonAge
+        - name: dragon-age
           in: path
           required: true
           description: greater than 0
@@ -172,15 +190,15 @@ paths:
         "400":
           description: invalid dragon age
           
-  /dragon/name/{dragonName}:
-    get:
+  /dragons/name/{dragon-name}:
+    post:
       tags:
         - dragon
       summary: get dragon by name
-      description: we will give you ALL dragons names of witch start with your current dragonName
+      description: we will give you ALL dragons names of witch start with your current dragon-name
       operationId: getDragonsByName
       parameters:
-        - name: dragonName
+        - name: dragon-name
           in: path
           required: true
           description: beginning of Dragon name
@@ -199,30 +217,11 @@ paths:
                     items:
                       $ref: "#/components/schemas/Dragon"
   
-  /dragon/getAll:
-    get:
-      tags:
-        - dragon
-      summary: get all Dragons
-      description: GIVE THEM TO MEEEE
-      operationId: getAllDragons
-      responses:
-        "200":
-          description: Successful Operation
-          content:
-            application/json:
-              schema:
-                properties:
-                  dragons:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Dragon"
-            
       
 # Killers:
   
-  /dragon/{dragon-id}/kill:
-    delete:
+  /killers/dragons/{dragon-id}/kill:
+    post:
       tags:
         - killer
       summary: :( dont fcking do it
@@ -245,12 +244,12 @@ paths:
         "404":
           description: Dragon Not Found
 
-  /team/{team-id}/move-to-cave/{cave-id}:
-    put:
+  /killers/teams/{team-id}/move-to-cave/{cave-id}:
+    post:
       tags:
         - killer
       summary: move to another cave
-      descriprion: move team to another cave
+      description: move team to another cave
       operationId: moveTeamToCave
       parameters:
         - name: team-id
