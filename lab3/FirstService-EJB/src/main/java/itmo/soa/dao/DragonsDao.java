@@ -12,26 +12,30 @@ import java.util.Optional;
 public class DragonsDao {
 
     @PersistenceContext(unitName = "myPersistenceUnit")
-    EntityManager entityManager;
-
-//    public void saveDragon(DragonDbo dragon){
-//        entityManager.persist(dragon);
-//    }
+    private EntityManager entityManager;
 
     public List<DragonDbo> findAll() {
-        return null;
+        return entityManager.createQuery("select d from DragonDbo d", DragonDbo.class).getResultList();
     }
 
     public void save(DragonDbo dragonDbo) {
+
         entityManager.persist(dragonDbo);
+        entityManager.flush(); // may cause trouble
     }
 
     public Optional<DragonDbo> findById(Long id) {
-        Optional<DragonDbo> dragonDbo = Optional.of(new DragonDbo());
-        return Optional.empty();
+        List<DragonDbo> dragonDbos = entityManager.createQuery("select d from DragonDbo d where d.id = " + id, DragonDbo.class).getResultList();
+
+        if (dragonDbos.isEmpty()) {
+            return Optional.empty();
+        }
+        else {
+            return Optional.of(dragonDbos.get(0));
+        }
     }
 
-    public void deleteById(long parseLong) {
-
+    public void deleteById(long id) {
+        entityManager.createQuery("delete from DragonDbo d where d.id = " + id);
     }
 }

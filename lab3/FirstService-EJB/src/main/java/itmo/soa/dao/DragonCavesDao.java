@@ -1,6 +1,7 @@
 package itmo.soa.dao;
 
 import itmo.soa.entity.DragonCave;
+import itmo.soa.entity.DragonDbo;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.orm.jpa.JpaTransactionManager;
 
@@ -9,6 +10,7 @@ import javax.ejb.Stateful;
 import javax.ejb.Stateless;
 import javax.persistence.*;
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -16,16 +18,26 @@ import java.util.Optional;
 public class DragonCavesDao {
 
     @PersistenceContext(unitName = "myPersistenceUnit")
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     public void save(DragonCave cave) {
-
         entityManager.persist(cave);
     }
 
 
     public Optional<DragonCave> findById(long id) {
-        return null;
+
+        List<DragonCave> caves = entityManager.createQuery("select d from DragonCave d where d.id = " + id, DragonCave.class).getResultList();
+        if (caves.isEmpty()) {
+            return Optional.empty();
+        }
+        else {
+            return Optional.of(caves.get(0));
+        }
+    }
+
+    public List<DragonCave> findAll() {
+        return entityManager.createQuery("select d from DragonCave d", DragonCave.class).getResultList();
     }
 }
 

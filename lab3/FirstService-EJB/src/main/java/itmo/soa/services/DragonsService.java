@@ -53,7 +53,6 @@ public class DragonsService {
         DragonDbo dragonDbo = new DragonDbo(dragon);
         caveDao.save(dragonDbo.getCave());
         dragonsDao.save(dragonDbo);
-//        dragonsDao.flush(); todo
         dragonDto.setId(dragonDbo.getId());
         dragonDto.setCreationDate(dragonDbo.getCreationDate());
         return dragonDto;

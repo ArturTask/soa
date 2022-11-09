@@ -1,13 +1,16 @@
-package itmo.soa.resources;
+package itmo.soa.controllers;
 
 import itmo.soa.dao.DragonCavesDao;
 import itmo.soa.dao.DragonsDao;
 import itmo.soa.dto.DragonCaveDto;
+import itmo.soa.dto.DragonDto;
+import itmo.soa.entity.Coordinates;
 import itmo.soa.entity.DragonCave;
 import itmo.soa.entity.DragonDbo;
 import itmo.soa.enums.Color;
 import itmo.soa.enums.DragonCharacter;
 import itmo.soa.enums.DragonType;
+import itmo.soa.services.DragonsService;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -25,16 +28,25 @@ public class MyHttpServlet extends HttpServlet {
     @EJB
     private DragonsDao dragonsDao;
 
+//    @EJB
+//    private DragonCavesDao cavesDao;
+
     @EJB
-    private DragonCavesDao cavesDao;
+    private DragonsService dragonsService;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         DragonCave dc = new DragonCave( 122121);
-        cavesDao.save(dc);
-        dragonsDao.save(new DragonDbo("nanan", 1L, 1L, "19.04.2002", 12L, Color.BLACK, DragonType.AIR, DragonCharacter.CHAOTIC, dc));
+//        cavesDao.save(dc);
+        DragonDbo dragonDbo = new DragonDbo("nanan", 1L, 1L, "19.04.2002", 12L, Color.BLACK, DragonType.AIR, DragonCharacter.CHAOTIC, dc);
+//        dragonsDao.save(dragonDbo);
         resp.getWriter().write("helloooooo");
-
+        try {
+            DragonDto dragonDto = dragonsService.addNewDragon(new DragonDto("nanan", new Coordinates(1L, 1L), "19.04.2002", 12L, Color.BLACK, DragonType.AIR, DragonCharacter.CHAOTIC, dc));
+            System.out.println("lala");
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        }
 
     }
 }
