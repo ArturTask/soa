@@ -5,11 +5,14 @@ import itmo.soa.dto.DragonCaveDto;
 import itmo.soa.entity.DragonCave;
 
 import javax.ejb.EJB;
+//import javax.ejb.Remote;
+import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import java.util.LinkedList;
 import java.util.List;
 
 @Stateless
+//@Remote(DragonCavesServiceInterface.class)
 public class DragonCavesService {
 
     @EJB

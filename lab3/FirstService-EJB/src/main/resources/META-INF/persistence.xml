@@ -7,12 +7,13 @@
 
     <persistence-unit name="myPersistenceUnit" >
 <!--        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>-->
-        <jta-data-source>jdbc/soa</jta-data-source>
+<!--        <jta-data-source>jdbc/soa</jta-data-source>--> <!-- для Glassfish-->
+        <jta-data-source>java:/SoaPostgresDS</jta-data-source> <!-- для JBoss-->
         <class>itmo.soa.entity.DragonCave</class>
         <class>itmo.soa.entity.DragonDbo</class>
         <properties>
 
-            <property name="hibernate.hbm2ddl.auto" value="create" />
+            <property name="hibernate.hbm2ddl.auto" value="update" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL9Dialect"/>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
 

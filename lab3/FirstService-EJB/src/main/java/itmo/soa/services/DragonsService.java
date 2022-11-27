@@ -13,16 +13,16 @@ import itmo.soa.exceptions.IllegalAgeException;
 import itmo.soa.exceptions.IllegalIdException;
 
 import javax.ejb.EJB;
+//import javax.ejb.Remote;
+import javax.ejb.Remote;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
 @Stateless
+//@Remote(DragonsServiceInterface.class)
 public class DragonsService {
-
 
     @EJB
     private DragonsDao dragonsDao;
