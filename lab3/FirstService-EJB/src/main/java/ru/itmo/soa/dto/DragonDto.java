@@ -1,14 +1,15 @@
-package itmo.soa.dto;
+package ru.itmo.soa.dto;
 
-import itmo.soa.entity.Coordinates;
-import itmo.soa.entity.Dragon;
-import itmo.soa.entity.DragonCave;
-import itmo.soa.entity.DragonDbo;
-import itmo.soa.enums.Color;
-import itmo.soa.enums.DragonCharacter;
-import itmo.soa.enums.DragonType;
+import ru.itmo.soa.entity.Coordinates;
+import ru.itmo.soa.entity.Dragon;
+import ru.itmo.soa.entity.DragonCave;
+import ru.itmo.soa.entity.DragonDbo;
+import ru.itmo.soa.enums.Color;
+import ru.itmo.soa.enums.DragonCharacter;
+import ru.itmo.soa.enums.DragonType;
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -16,7 +17,7 @@ import java.time.format.DateTimeParseException;
 
 @Data
 @NoArgsConstructor
-public class DragonDto {
+public class DragonDto implements Serializable {
 
     private static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 

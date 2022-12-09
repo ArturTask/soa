@@ -1,16 +1,16 @@
-package itmo.soa.services;
+package ru.itmo.soa.services;
 
-import itmo.soa.dao.DragonCavesDao;
-import itmo.soa.dao.DragonsDao;
-import itmo.soa.dto.AgeDto;
-import itmo.soa.dto.DragonDto;
-import itmo.soa.entity.Dragon;
-import itmo.soa.entity.DragonCave;
-import itmo.soa.entity.DragonDbo;
-import itmo.soa.exceptions.CaveNotFoundException;
-import itmo.soa.exceptions.DragonNotFoundException;
-import itmo.soa.exceptions.IllegalAgeException;
-import itmo.soa.exceptions.IllegalIdException;
+import ru.itmo.soa.dao.DragonCavesDao;
+import ru.itmo.soa.dao.DragonsDao;
+import ru.itmo.soa.dto.AgeDto;
+import ru.itmo.soa.dto.DragonDto;
+import ru.itmo.soa.entity.Dragon;
+import ru.itmo.soa.entity.DragonCave;
+import ru.itmo.soa.entity.DragonDbo;
+import ru.itmo.soa.exceptions.CaveNotFoundException;
+import ru.itmo.soa.exceptions.DragonNotFoundException;
+import ru.itmo.soa.exceptions.IllegalAgeException;
+import ru.itmo.soa.exceptions.IllegalIdException;
 
 import javax.ejb.EJB;
 //import javax.ejb.Remote;
@@ -21,8 +21,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Stateless
-//@Remote(DragonsServiceInterface.class)
-public class DragonsService {
+@Remote(DragonsServiceInterface.class)
+public class DragonsService implements DragonsServiceInterface{
 
     @EJB
     private DragonsDao dragonsDao;
@@ -33,6 +33,7 @@ public class DragonsService {
 //    @PersistenceContext(unitName = "myPersistenceUnit")
 //    private EntityManager entityManager;
 
+    @Override
     public List<DragonDto> getAllDragons(){
         Iterable<DragonDbo> all = dragonsDao.findAll();
         List<DragonDto> dragonLinkedList = new LinkedList<>();
@@ -42,6 +43,7 @@ public class DragonsService {
         return dragonLinkedList;
     }
 
+    @Override
     public DragonDto addNewDragon(DragonDto dragonDto) throws InstantiationException {
         if (dragonDto.getId()!=null){
             throw new InstantiationException();
@@ -58,6 +60,7 @@ public class DragonsService {
         return dragonDto;
     }
 
+    @Override
     public DragonDto updateDragon(DragonDto dragonDto) throws InstantiationException, DragonNotFoundException, CaveNotFoundException {
 
         Optional<DragonDbo> dragonDbo = dragonsDao.findById(dragonDto.getId());
@@ -73,6 +76,7 @@ public class DragonsService {
         return dragonDto;
     }
 
+    @Override
     public DragonDto getDragonById( String id) throws IllegalIdException, DragonNotFoundException {
         try {
             Optional<DragonDbo> dragon = dragonsDao.findById(Long.parseLong(id));
@@ -86,6 +90,7 @@ public class DragonsService {
         }
     }
 
+    @Override
     public void deleteDragonById( String id) throws IllegalIdException, DragonNotFoundException {
         try {
             Optional<DragonDbo> dragon = dragonsDao.findById(Long.parseLong(id));
@@ -100,6 +105,7 @@ public class DragonsService {
     }
 
     //    business logic
+    @Override
     public AgeDto getAverageAge(){
         List<DragonDbo> allDragons = dragonsDao.findAll();
         if (allDragons.isEmpty()){
@@ -112,6 +118,7 @@ public class DragonsService {
         return new AgeDto((float) (summAge/allDragons.size()));
     }
 
+    @Override
     public List<DragonDto> getDragonsAgeLessThan(String age) throws IllegalAgeException {
         try {
             long lessThanAge = Long.parseLong(age);
@@ -134,6 +141,7 @@ public class DragonsService {
         }
     }
 
+    @Override
     public List<DragonDto> getDragonsStartsWithName(String namePrefix){
 
         List<DragonDbo> allDragons = dragonsDao.findAll();

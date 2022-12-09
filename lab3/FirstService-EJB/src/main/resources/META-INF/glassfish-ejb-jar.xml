@@ -1,0 +1,25 @@
+
+<!DOCTYPE glassfish-ejb-jar PUBLIC "-//GlassFish.org//
+DTD GlassFish Application Server 3.1 EJB 3.1//EN" 
+"http://glassfish.org/dtds/glassfish-ejb-jar_3_1-1.dtd">
+<glassfish-ejb-jar>
+<display-name>dragon-ejb</display-name>
+<enterprise-beans>
+  <ejb>
+    <ejb-name>LOL</ejb-name>
+    <ejb-ref>
+      <ejb-ref-name>DragonCavesService</ejb-ref-name>
+      <jndi-name>java:global/dragon-ejb/MyRemoteBean</jndi-name>
+    </ejb-ref>
+  </ejb>
+
+  <ejb>
+    <ejb-name>LOL2</ejb-name>
+    <ejb-ref>
+      <ejb-ref-name>DragonsService</ejb-ref-name>
+      <jndi-name>java:global/dragon-ejb/MyRemoteBean2</jndi-name>
+    </ejb-ref>
+  </ejb>
+</enterprise-beans>
+<keep-state>true</keep-state>
+</glassfish-ejb-jar>

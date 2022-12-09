@@ -1,6 +1,6 @@
-package itmo.soa.dao;
+package ru.itmo.soa.dao;
 
-import itmo.soa.entity.DragonDbo;
+import ru.itmo.soa.entity.DragonDbo;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

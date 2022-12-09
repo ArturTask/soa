@@ -1,4 +1,4 @@
-package itmo.soa;
+package ru.itmo.soa;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

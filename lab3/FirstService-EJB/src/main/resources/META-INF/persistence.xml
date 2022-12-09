@@ -9,8 +9,8 @@
 <!--        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>-->
 <!--        <jta-data-source>jdbc/soa</jta-data-source>--> <!-- для Glassfish-->
         <jta-data-source>java:/SoaPostgresDS</jta-data-source> <!-- для JBoss-->
-        <class>itmo.soa.entity.DragonCave</class>
-        <class>itmo.soa.entity.DragonDbo</class>
+        <class>ru.itmo.soa.entity.DragonCave</class>
+        <class>ru.itmo.soa.entity.DragonDbo</class>
         <properties>
 
             <property name="hibernate.hbm2ddl.auto" value="update" />

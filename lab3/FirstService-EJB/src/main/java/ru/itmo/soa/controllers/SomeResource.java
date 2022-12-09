@@ -1,18 +1,17 @@
-package itmo.soa.controllers;
+package ru.itmo.soa.controllers;
 
-import itmo.soa.dto.DragonDto;
-import itmo.soa.entity.Coordinates;
-import itmo.soa.entity.DragonCave;
-import itmo.soa.entity.DragonDbo;
-import itmo.soa.enums.Color;
-import itmo.soa.enums.DragonCharacter;
-import itmo.soa.enums.DragonType;
-import itmo.soa.exceptions.DragonNotFoundException;
-import itmo.soa.exceptions.IllegalIdException;
-import itmo.soa.services.DragonsService;
+import ru.itmo.soa.dto.DragonDto;
+import ru.itmo.soa.entity.Coordinates;
+import ru.itmo.soa.entity.DragonCave;
+import ru.itmo.soa.entity.DragonDbo;
+import ru.itmo.soa.enums.Color;
+import ru.itmo.soa.enums.DragonCharacter;
+import ru.itmo.soa.enums.DragonType;
+import ru.itmo.soa.exceptions.DragonNotFoundException;
+import ru.itmo.soa.exceptions.IllegalIdException;
+import ru.itmo.soa.services.DragonsService;
 
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;

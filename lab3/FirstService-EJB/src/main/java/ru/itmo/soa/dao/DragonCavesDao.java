@@ -1,15 +1,9 @@
-package itmo.soa.dao;
+package ru.itmo.soa.dao;
 
-import itmo.soa.entity.DragonCave;
-import itmo.soa.entity.DragonDbo;
-import org.hibernate.jpa.HibernatePersistenceProvider;
-import org.springframework.orm.jpa.JpaTransactionManager;
+import ru.itmo.soa.entity.DragonCave;
 
-import javax.annotation.Resource;
-import javax.ejb.Stateful;
 import javax.ejb.Stateless;
 import javax.persistence.*;
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
