@@ -29,7 +29,9 @@ public class DragonsController {
     @GET
     @Path("")
     public Response getAllDragons(){
+//        Response.status(400).entity(new Object()).build();
         return Response.ok(new AllDragonsDto(dragonsService.getAllDragons())).build();
+
     }
 
     @POST
