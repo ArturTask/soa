@@ -8,5 +8,7 @@
 3*/
 /lab3/serviceArchitecture/
 /lab3/haproxy.cfg
-
+*mvnw*
+*.mvn/
+*lib/
 
